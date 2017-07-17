@@ -29,7 +29,7 @@ Object.assign(url, {
   },
   parseQuery: function parseQuery (query) {
     query = query || ''
-    var r
+    var r = {}
     parseStrByPhp(query, r)
     return r
   },
