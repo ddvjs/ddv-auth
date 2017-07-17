@@ -49,13 +49,6 @@ module.exports = function parse_str (str, array) { // eslint-disable-line camelc
   var _fixStr = function (str) {
     return decodeURIComponent(str.replace(/\+/g, '%20'))
   }
-  var $global = (typeof window !== 'undefined' ? window : global)
-  $global.$locutus = $global.$locutus || {}
-  var $locutus = $global.$locutus
-  $locutus.php = $locutus.php || {}
-  if (!array) {
-    array = $global
-  }
   for (i = 0; i < sal; i++) {
     tmp = strArr[i].split('=')
     key = _fixStr(tmp[0])
@@ -103,7 +96,7 @@ module.exports = function parse_str (str, array) { // eslint-disable-line camelc
         lastObj = obj
         if ((key !== '' && key !== ' ') || j === 0) {
           if (obj[key] === undef) {
-            obj[key] = {}
+            obj[key] = keys[keys.length - 1] === '' ? [] : {}
           }
           obj = obj[key]
         } else {
