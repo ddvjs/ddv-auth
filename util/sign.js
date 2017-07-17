@@ -1,12 +1,13 @@
 var sign = {}
 // 工具
 var util = require('./')
+var url = require('./url.js')
 module.exports = sign
 Object.assign(sign, {
   canonicalQuerySort: function canonicalQuerySort (canonicalQuery = '') {
     // 拆分get请求的参数
     if ((!util.isArray(canonicalQuery)) && typeof canonicalQuery === 'object') {
-      canonicalQuery = util.buildParams(canonicalQuery, true)
+      canonicalQuery = url.buildQuery(canonicalQuery, true)
     }
     if (typeof canonicalQuery === 'string') {
       canonicalQuery = canonicalQuery.split('&')
@@ -32,7 +33,7 @@ Object.assign(sign, {
       value = util.trim(temp.substr(i + 1))
       // 去空格
       // 插入新数组
-      queryArray.push(util.urlEncode(util.urlDecode(key)) + '=' + util.urlEncode(util.urlDecode(value)))
+      queryArray.push(url.urlEncode(url.urlDecode(key)) + '=' + url.urlEncode(url.urlDecode(value)))
     }
     // 排序
     queryArray.sort()
@@ -49,7 +50,7 @@ Object.assign(sign, {
     canonicalHeader = []
     for (key in signHeaders) {
       value = signHeaders[key]
-      canonicalHeader.push((util.urlEncode(util.trim(key)) || '').toLowerCase() + ':' + util.urlEncode(util.trim(util.isArray(value) ? value.join('; ') : value)))
+      canonicalHeader.push((url.urlEncode(util.trim(key)) || '').toLowerCase() + ':' + url.urlEncode(util.trim(util.isArray(value) ? value.join('; ') : value)))
     }
     canonicalHeader.sort()
     // 服务器模拟客户端生成的头
