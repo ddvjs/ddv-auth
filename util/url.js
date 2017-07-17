@@ -60,8 +60,8 @@ Object.assign(url, {
   // 编码
   urlEncode: function urlEncode (string, encodingSlash) {
     var result = encodeURIComponent(string)
-    result = result.replace(/[!'()*]/g, function ($1) {
-      return url.kEscapedMap[$1]
+    result = result.replace(/[!'()*]/g, function (key) {
+      return url.kEscapedMap[key]
     })
     if (encodingSlash === false) {
       result = result.replace(/%2F/gi, '/')
