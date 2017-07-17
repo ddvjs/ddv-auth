@@ -1,6 +1,7 @@
 'use strict'
 var util = require('./')
 var url = require('./url.base.fn.js')
+var parseStrByPhp = require('../util/parse_str')
 // 工具
 module.exports = url
 Object.assign(url, {
@@ -28,6 +29,9 @@ Object.assign(url, {
   },
   parseQuery: function parseQuery (query) {
     query = query || ''
+    var r
+    parseStrByPhp(query, r)
+    return r
   },
   buildQuery: function buildQuery (params, isQuery) {
     params = params || {}
