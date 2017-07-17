@@ -150,11 +150,7 @@ Object.assign(url, {
     typeof url === 'object' || (urli = url.parse(url))
     typeof parts === 'object' || (parts = url.parse(parts))
 
-    // isset(urli['query']) && is_string(urli['query']) || urli['query'] = null;
-    // isset(parts['query']) && is_string(parts['query']) || parts['query'] = null;
-
     var keys = ['user', 'pass', 'port', 'path', 'query', 'fragment']
-    // $keys = array('user', 'pass', 'port', 'path', 'query', 'fragment');
 
     // HTTP_URL_STRIP_ALL and HTTP_URL_STRIP_AUTH cover several other flags.
     if (flags & url.HTTP_URL_STRIP_ALL) {
