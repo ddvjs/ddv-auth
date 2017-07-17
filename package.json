@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
+    "cryptojs": "^2.5.3",
     "es5-shim": "^4.5.9",
     "es6-shim": "^0.35.3"
   }
