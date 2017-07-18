@@ -2,6 +2,11 @@ var sign = {}
 // 工具
 var util = require('./')
 var url = require('./url.js')
+var cryptoJsCore = require('crypto-js/core')
+var cryptoJsHex = require('crypto-js/enc-hex')
+var cryptoJsBase64 = require('crypto-js/enc-base64')
+// var cryptoJsHmacSha256 =
+require('crypto-js/hmac-sha256')
 module.exports = sign
 Object.assign(sign, {
   canonicalQuerySort: function canonicalQuerySort (canonicalQuery = '') {
@@ -83,5 +88,26 @@ Object.assign(sign, {
   },
   createGuid: function createGuid (opt) {
     return (opt ? '{' : '') + util.createGuid() + (opt ? '}' : '')
+  },
+  md5Hex: function (str, isToString) {
+    str = str || ''
+    if (isToString !== false) {
+      str = (str || '').toString()
+    }
+    return cryptoJsCore.MD5(str).toString(cryptoJsHex)
+  },
+  md5Base64: function (str, isToString) {
+    str = str || ''
+    if (isToString !== false) {
+      str = (str || '').toString()
+    }
+    return cryptoJsCore.MD5(str).toString(cryptoJsBase64)
+  },
+  HmacSHA256: function (str, key, isToString) {
+    str = str || ''
+    if (isToString !== false) {
+      str = (str || '').toString()
+    }
+    return cryptoJsCore.HmacSHA256(str, key).toString(cryptoJsHex)
   }
 })
