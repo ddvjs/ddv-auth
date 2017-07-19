@@ -1,6 +1,6 @@
 {
   "name": "ddv-auth",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ddv-auth",
   "main": "./lib/api.js",
   "scripts": {
