@@ -16,6 +16,7 @@ Object.assign(url, {
       query: '',
       fragment: ''
     }
+    uri = uri && uri.indexOf(':') === -1 && uri.charAt(0) !== '/' ? ('/' + uri) : '/'
     var t = url('{}', uri || '/')
     r.scheme = t.protocol ? t.protocol : r.scheme
     r.host = t.hostname ? t.hostname : r.host
