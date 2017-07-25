@@ -16,7 +16,7 @@ Object.assign(url, {
       query: '',
       fragment: ''
     }
-    if (uri && uri.indexOf(':') === -1 && uri.charAt(0) !== '/') {
+    if (uri && uri.indexOf && uri.charAt && uri.indexOf(':') === -1 && uri.charAt(0) !== '/') {
       uri = '/' + uri
     }
     var t = url('{}', uri || '/')
@@ -150,7 +150,7 @@ Object.assign(url, {
     urli = urli || {}
     parts = parts || {}
     flags = flags || url.HTTP_URL_REPLACE
-    typeof url === 'object' || (urli = url.parse(url))
+    typeof urli === 'object' || (urli = url.parse(urli))
     typeof parts === 'object' || (parts = url.parse(parts))
 
     var keys = ['user', 'pass', 'port', 'path', 'query', 'fragment']
