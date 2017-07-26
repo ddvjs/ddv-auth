@@ -33,9 +33,9 @@ Object.assign(sign, {
         continue
       }
       // 取得key
-      key = util.trim(temp.substr(0, i))
+      key = util.trim(temp.substr(0, tempIndex))
       // 取得value
-      value = util.trim(temp.substr(i + 1))
+      value = util.trim(temp.substr(tempIndex + 1))
       // 去空格
       // 插入新数组
       queryArray.push(url.urlEncode(url.urlDecode(key)) + '=' + url.urlEncode(url.urlDecode(value)))
