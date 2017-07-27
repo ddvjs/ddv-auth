@@ -7,6 +7,8 @@ var cryptoJsHex = require('crypto-js/enc-hex')
 var cryptoJsBase64 = require('crypto-js/enc-base64')
 // var cryptoJsHmacSha256 =
 require('crypto-js/hmac-sha256')
+// var cryptoJsMd5 =
+require('crypto-js/md5')
 module.exports = sign
 Object.assign(sign, {
   canonicalQuerySort: function canonicalQuerySort (canonicalQuery = '') {
