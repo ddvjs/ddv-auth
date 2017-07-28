@@ -105,6 +105,12 @@ Object.assign(sign, {
     }
     return cryptoJsCore.MD5(str).toString(cryptoJsBase64)
   },
+  /**
+   * HmacSHA256
+   * @param    {String}               str        [description]
+   * @param    {String}               key        [description]
+   * @param    {Boolean}              isToString [description]
+   */
   HmacSHA256: function (str, key, isToString) {
     str = str || ''
     if (isToString !== false) {

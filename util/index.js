@@ -12,6 +12,11 @@ var createNewidSumLast = 0
 var createNewidTimeLast = 0
 // 创建请求id
 Object.assign(util, {
+  /**
+   * 创建一个当前运行环境中唯一的id
+   * @param    {Boolean}                 is10 [是否为10进制]
+   * @return   {String}                       [返回唯一id]
+   */
   createNewPid: function createNewid (is10) {
     var r
     if (createNewidTimeLast !== util.time()) {
@@ -25,7 +30,11 @@ Object.assign(util, {
     }
     return r
   },
-  // 生成guid
+  /**
+   * 生成guid
+   * @param    {String}                 s [模板]
+   * @return   {String}                   [返回guid]
+   */
   createGuid: function createGuid (s) {
     return (s || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx').replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0
@@ -37,15 +46,25 @@ Object.assign(util, {
 
 // 时间工具
 Object.assign(util, {
-  // 获取当前时间开始
+  /**
+   * 获取当前时间开始
+   * @return   {Int}                 [毫秒级时间戳]
+   */
   now: function now () {
     return (new Date()).getTime()
   },
-  // 获取php的时间戳
+  /**
+   * 获取php的时间戳
+   * @return   {Int}                 [秒级时间戳]
+   */
   time: function time () {
     return parseInt(util.now() / 1000)
   },
-  // 获取php的时间戳
+  /**
+   * 去空格
+   * @param    {String}                 t [需要去空格的字符串]
+   * @return   {String}                   [去空格后的字符串]
+   */
   trim: function trim (t) {
     return t.toString().trim()
   }
@@ -53,14 +72,29 @@ Object.assign(util, {
 
 // 基本判断
 Object.assign(util, {
-  // 判断是一个方法
+  /**
+   * 判断是一个方法
+   * @param    {Function}               fn [这个对象是否一个方法]
+   * @return   {Boolean}                   [是否为一个方法]
+   */
   isFunction: function isFunction (fn) {
     return typeof fn === 'function'
   },
-  // 判断是否为一个数组
-  isArray: function isArray () {
+  /**
+   * 判断是否为一个数组
+   * @param    {Array}               fn [这个对象是否一个方法]
+   * @return   {Boolean}                [description]
+   */
+  isArray: function isArray (a) {
     return Array.isArray.apply(this, arguments)
   },
+  /**
+   * 是否为一个数字
+   * @author: 桦 <yuchonghua@163.com>
+   * @DateTime 2017-07-28T09:46:39+0800
+   * @param    {[type]}                 obj [description]
+   * @return   {Boolean}                    [description]
+   */
   isNumber: function isNumber (obj) {
     return (typeof obj === 'string' || typeof obj === 'number') && (!util.isArray(obj) && (obj - parseFloat(obj) >= 0))
   },
@@ -114,7 +148,15 @@ Object.assign(util, {
     }
     return myNewObj
   },
-  // 复制对象，通过制定key
+  /**
+   * 复制对象，通过制定key
+   * @author: 桦 <yuchonghua@163.com>
+   * @DateTime 2017-07-28T09:47:56+0800
+   * @param    {[type]}                 oldObj [description]
+   * @param    {[type]}                 newObj [description]
+   * @param    {[type]}                 keys   [description]
+   * @return   {[type]}                        [description]
+   */
   copyObjByKey: function copyObjByKey (oldObj, newObj, keys) {
     keys = keys || []
     keys.forEach(function (key) {
