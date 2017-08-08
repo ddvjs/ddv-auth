@@ -11,7 +11,7 @@ require('crypto-js/hmac-sha256')
 require('crypto-js/md5')
 module.exports = sign
 Object.assign(sign, {
-  canonicalQuerySort: function canonicalQuerySort (canonicalQuery = '') {
+  canonicalQuerySort: function canonicalQuerySort (canonicalQuery) {
     // 拆分get请求的参数
     if ((!util.isArray(canonicalQuery)) && typeof canonicalQuery === 'object') {
       canonicalQuery = url.buildQuery(canonicalQuery, true)
@@ -65,7 +65,7 @@ Object.assign(sign, {
     canonicalHeader = key = value = void 0
     return r
   },
-  getHeaderKeysByStr: function getHeaderKeysByStr (signHeaderKeys = '') {
+  getHeaderKeysByStr: function getHeaderKeysByStr (signHeaderKeys) {
     var key, value, signHeaderKeysNew
     if (typeof signHeaderKeys === 'string') {
       // 拆分头键名为数组 方便后期处理
