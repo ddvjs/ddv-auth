@@ -1,4 +1,3 @@
-'use strict'
 var util = require('./')
 var url = require('./url.base.fn.js')
 var parseStrByPhp = require('../util/parse_str')
