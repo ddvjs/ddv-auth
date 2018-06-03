@@ -1,9 +1,5 @@
 // 导出模块
 module.exports = util
-if (typeof window !== 'undefined') {
-  require('es5-shim')
-  require('es6-shim')
-}
 
 // 创建最后总和
 var createNewidSumLast = 0

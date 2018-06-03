@@ -49,8 +49,6 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
-    "crypto-js": "^3.1.9-1",
-    "es5-shim": "~4.5.10",
-    "es6-shim": "~0.35.3"
+    "crypto-js": "^3.1.9-1"
   }
 }
