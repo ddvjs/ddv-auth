@@ -61,7 +61,7 @@ Object.assign(util, {
    * @return   {String}                   [去空格后的字符串]
    */
   trim: function trim (t) {
-    return t.toString().trim()
+    return (t || typeof t === 'string') ? (t.toString().trim()) : t
   }
 })
 
