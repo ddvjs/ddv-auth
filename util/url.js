@@ -4,30 +4,78 @@ var parseStrByPhp = require('../util/parse_str')
 // 工具
 module.exports = url
 Object.assign(url, {
-  parse: function parse (uri) {
-    var r = {
-      scheme: 'http',
-      host: null,
-      port: null,
-      user: null,
-      pass: null,
-      path: '/',
-      query: '',
-      fragment: ''
+  parse: function parse (str, component) {
+    var query
+
+    var mode = 'php'
+
+    var key = [
+      'source',
+      'scheme',
+      'authority',
+      'userInfo',
+      'user',
+      'pass',
+      'host',
+      'port',
+      'relative',
+      'path',
+      'directory',
+      'file',
+      'query',
+      'fragment'
+    ]
+
+    // For loose we added one optional slash to post-scheme to catch file:/// (should restrict this)
+    var parser = {
+      php: new RegExp([
+        '(?:([^:\\/?#]+):)?',
+        '(?:\\/\\/()(?:(?:()(?:([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?))?',
+        '()',
+        '(?:(()(?:(?:[^?#\\/]*\\/)*)()(?:[^?#]*))(?:\\?([^#]*))?(?:#(.*))?)'
+      ].join('')),
+      strict: new RegExp([
+        '(?:([^:\\/?#]+):)?',
+        '(?:\\/\\/((?:(([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?))?',
+        '((((?:[^?#\\/]*\\/)*)([^?#]*))(?:\\?([^#]*))?(?:#(.*))?)'
+      ].join('')),
+      loose: new RegExp([
+        '(?:(?![^:@]+:[^:@\\/]*@)([^:\\/?#.]+):)?',
+        '(?:\\/\\/\\/?)?',
+        '((?:(([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?)',
+        '(((\\/(?:[^?#](?![^?#\\/]*\\.[^?#\\/.]+(?:[?#]|$)))*\\/?)?([^?#\\/]*))',
+        '(?:\\?([^#]*))?(?:#(.*))?)'
+      ].join(''))
     }
-    if (uri && uri.indexOf && uri.charAt && uri.indexOf(':') === -1 && uri.charAt(0) !== '/') {
-      uri = '/' + uri
+
+    var m = parser[mode].exec(str)
+    var uri = {}
+    var i = 14
+
+    while (i--) {
+      if (m[i]) {
+        uri[key[i]] = m[i]
+      }
     }
-    var t = url('{}', uri || '/')
-    r.scheme = t.protocol ? t.protocol : r.scheme
-    r.host = t.hostname ? t.hostname : r.host
-    r.port = t.port ? t.port : r.port
-    r.user = t.user ? t.user : r.user
-    r.pass = t.pass ? t.pass : r.pass
-    r.path = t.path ? t.path : r.path
-    r.query = t.query ? t.query : r.query
-    r.fragment = t.hash ? t.hash : r.fragment
-    return r
+
+    if (component) {
+      return uri[component.replace('PHP_URL_', '').toLowerCase()]
+    }
+
+    if (mode !== 'php') {
+      var name = 'queryKey'
+      parser = /(?:^|&)([^&=]*)=?([^&]*)/g
+      uri[name] = {}
+      query = uri[key[12]] || ''
+      query.replace(parser, function ($0, $1, $2) {
+        if ($1) {
+          uri[name][$1] = $2
+        }
+      })
+    }
+
+    delete uri.source
+    return uri
   },
   parseQuery: function parseQuery (query) {
     query = query || ''
